@@ -1,0 +1,223 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary list-panel" id="list-panel">
+            <div class="panel-heading list-panel-heading">
+                <h1 class="panel-title list-panel-title">Users</h1>
+                @*<button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#advancedSearchModal" id="advancedsearch-button">
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Advanced Search
+    </button>*@
+                <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-url="@Url.Action("CreateUser","User")" id="btnCreateUser">
+                    <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Add User
+                </button>
+            </div>
+            <div class="panel-body">
+                <table id="Users-data-table" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Address</th>
+                            <th>Status</th> 
+                            <th>Actions</th>                            
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="CreateUserModal" aria-hidden="true" data-backdrop="static">
+    <div id="createUserContainer">
+    </div>
+</div>
+
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="EditUserModal" aria-hidden="true" data-backdrop="static">
+    <div id="editUserContainer">
+    </div>
+</div>
+
+<div class="modal fade" id="detailsUserModal" tabindex="-1" role="dialog" aria-labelledby="DetailsUserModal" aria-hidden="true" data-backdrop="static">
+    <div id="detailsUserContainer">
+    </div>
+</div>
+
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="DeleteUserModal" aria-hidden="true" data-backdrop="static">
+    <div id="deleteUserContainer">
+    </div>
+</div>
+
+
+
+@section Scripts
+{
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+   
+        $.ajax({
+            method: "get",
+            dataType: "json",
+            url: '@Url.Action("GetUsers", "User")',
+            success: function (data) {
+                $('#Users-data-table').dataTable({
+                    data: data,
+                    "columns": [
+                            { "data": "UserId" },
+                            { "data": "FirstName" },
+                            { "data": "LastName" },
+                            { "data": "Address" },
+                            { "data": "Status" },
+                            { "data": null}
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": -1,
+                            "render": function (data, type, row, meta) {
+                                return '<div style="text-align:center">' +
+                                    '<button style="width:40%; margin-top: 5px;"  class="btn btn-warning" onclick="EditUser(' + data.UserId  +')"> Edit </button>' +
+                                    '&nbsp;&nbsp;' +
+                                    '<button style="width:40%; margin-top: 5px;"  class="btn btn-danger" onclick="DeleteUser(' + data.UserId + ')"> delete </button>' +
+                                    '</div>';
+                            }
+                        }
+                    ]
+                })
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert("error buddy!!");
+                alert(xhr.responseText);
+                alert(thrownError);
+            }
+        })
+        
+
+            $("#btnCreateUser").on("click", function () {
+                var url = $(this).data("url");
+
+                $.ajax({
+                    method: "get",
+                    //dataType: "text\html",
+                    url: url,
+                    success: function (data) {
+                        debugger;
+                        $('#createUserContainer').html(data);
+                        $('#createUserModal').modal('show');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        debugger;
+                        alert("error buddy!!");
+                        alert(xhr.responseText);
+                        alert(thrownError);
+                    }
+                    });
+                //$.get(url, function (data) {
+                //    $('#createUserContainer').html(data);
+
+                //    $('#createUserModal').modal('show');
+                //}, function (jqXHR, textStatus, errorThrown) {
+                //    debugger;
+                //});
+
+            });
+
+
+
+            $('#Users-data-table').on("click", ".editUser", function (event) {
+
+                event.preventDefault();
+
+                var url = $(this).attr("href");
+
+                $.get(url, function (data) {
+                    $('#editUserContainer').html(data);
+
+                    $('#editUserModal').modal('show');
+                });
+
+            });
+
+
+
+
+
+            $('#Users-data-table').on("click", ".detailsUser", function (event) {
+
+                event.preventDefault();
+
+                var url = $(this).attr("href");
+
+                $.get(url, function (data) {
+                    $('#detailsUserContainer').html(data);
+
+                    $('#detailsUserModal').modal('show');
+                });
+
+            });
+
+
+
+
+            $('#Users-data-table').on("click", ".deleteUser", function (event) {
+
+                event.preventDefault();
+
+                var url = $(this).attr("href");
+
+                $.get(url, function (data) {
+                    $('#deleteUserContainer').html(data);
+
+                    $('#deleteUserModal').modal('show');
+                });
+
+            });
+
+        });
+
+    /**** Create User Ajax Form CallBack ********/
+
+    function CreateUserSuccess(data) {
+
+        if (data != "success") {
+            $('#createUserContainer').html(data);
+            return;
+        }
+        $('#createUserModal').modal('hide');
+        $('#createUserContainer').html("");
+        UserListVM.refresh();
+
+    }
+
+    /**** Edit User Ajax Form CallBack ********/
+
+    function UpdateUserSuccess(data) {
+
+        if (data != "success") {
+            $('#editUserContainer').html(data);
+            return;
+        }
+        $('#editUserModal').modal('hide');
+        $('#editUserContainer').html("");
+        UserListVM.refresh();
+
+    }
+
+    /**** Delet User Ajax Form CallBack ********/
+
+    function DeleteUserSuccess(data) {
+
+        if (data != "success") {
+            $('#deleteUserContainer').html(data);
+            return;
+        }
+        $('#deleteUserModal').modal('hide');
+        $('#deleteUserContainer').html("");
+        UserListVM.refresh();
+
+    }
+
+
+</script>
+    
+ }

@@ -1,0 +1,69 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary list-panel" id="list-panel">
+            <div class="panel-heading list-panel-heading">
+                <h1 class="panel-title list-panel-title">Products</h1>
+                @*<button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#advancedSearchModal" id="advancedsearch-button">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Advanced Search
+                </button>*@
+                <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-url="@Url.Action("CreateProduct","App")" id="btnCreateProduct">
+                    <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> Add Product
+                </button>
+            </div>
+            <div class="panel-body">
+                <table id="products-data-table" class="table table-striped table-bordered" style="width:100%;"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="createProductModal" tabindex="-1" role="dialog" aria-labelledby="createProductModal" aria-hidden="true" data-backdrop="static">
+    <div id="createProductContainer">
+    </div>
+</div>
+
+<div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="EditProductModal" aria-hidden="true" data-backdrop="static">
+    <div id="editProductContainer">
+    </div>
+</div>
+
+<div class="modal fade" id="detailsProductModal" tabindex="-1" role="dialog" aria-labelledby="DetailsProductModal" aria-hidden="true" data-backdrop="static">
+    <div id="detailsProductContainer">
+    </div>
+</div>
+
+<div class="modal fade" id="deleteProductModal" tabindex="-1" role="dialog" aria-labelledby="DeleteProductModal" aria-hidden="true" data-backdrop="static">
+    <div id="deleteProductContainer">
+    </div>
+</div>
+
+
+@section Scripts
+{
+
+    <script type="text/javascript">
+        $.ajax({
+            method: "get",
+            dataType: "json",
+            url: '@Url.Action("GetProducts", "Product")',
+            success: function (data) {
+                $('#products-data-table').dataTable({
+                    data: data,
+                    "columns": [
+                            { "data": "ProductId" },
+                            { "data": "ProductName" },
+                            { "data": "Rate" }
+                    ]
+                })
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert("error buddy!!");
+                alert(xhr.responseText);
+                alert(thrownError);
+            }
+        });
+
+    </script>
+
+}
+

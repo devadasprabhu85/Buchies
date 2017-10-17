@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 14 for Web
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buchies_Web", "Buchies_Web\Buchies_Web.csproj", "{4A099DEC-9F2D-4A4B-B3C3-029856231D94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buchies_Service", "Buchies_Service\Buchies_Service.csproj", "{A553CD24-6A80-4E6F-94C3-7E6FEFA520EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A099DEC-9F2D-4A4B-B3C3-029856231D94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A099DEC-9F2D-4A4B-B3C3-029856231D94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A099DEC-9F2D-4A4B-B3C3-029856231D94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A099DEC-9F2D-4A4B-B3C3-029856231D94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A553CD24-6A80-4E6F-94C3-7E6FEFA520EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A553CD24-6A80-4E6F-94C3-7E6FEFA520EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A553CD24-6A80-4E6F-94C3-7E6FEFA520EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A553CD24-6A80-4E6F-94C3-7E6FEFA520EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

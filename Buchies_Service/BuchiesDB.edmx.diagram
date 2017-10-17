@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d21eba1e90db4404960fe913d67361d8" Name="Diagram1">
+        <EntityTypeShape EntityType="BuchiesModel.Billing" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuchiesModel.Product" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuchiesModel.Purchase" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuchiesModel.User" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BuchiesModel.UserStandardPurchase" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="BuchiesModel.FK_Billing_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="BuchiesModel.FK_Purchase_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="BuchiesModel.FK_UserStandardPurchase_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="BuchiesModel.FK_Purchase_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="BuchiesModel.FK_UserStandardPurchase_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
